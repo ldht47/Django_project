@@ -1,4 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Componente
 
 def home(request):
-    return HttpResponse("<h1>¡Hola Mundo! Este es mi primer sitio en Django.</h1>")
+    # El ORM hace el "SELECT * FROM Componente" por ti
+    lista_componentes = Componente.objects.all() 
+    
+    # Enviamos los datos al archivo HTML (que crearemos en el siguiente paso)
+    return render(request, 'home.html', {'componentes': lista_componentes})
